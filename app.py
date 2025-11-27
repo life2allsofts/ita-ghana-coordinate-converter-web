@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, jsonify
-from converter import GhanaWebConverter  # This will auto-choose the right converter
+from converter import GhanaWebConverter
 from converter.coordinate_utils import dms_to_decimal, decimal_to_dms
 
-app = Flask(__name__)
+app = Flask(__name__, 
+            static_folder='static',
+            static_url_path='/static')
+
 converter = GhanaWebConverter()
 
 @app.route('/')

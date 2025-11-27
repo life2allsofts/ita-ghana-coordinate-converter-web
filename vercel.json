@@ -12,11 +12,8 @@
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "headers": {
-        "Cache-Control": "public, max-age=0, must-revalidate"
-      },
-      "dest": "/static/$1"
+      "src": "/static/(?<file>.*)",
+      "dest": "/static/$file"
     },
     {
       "src": "/(.*)",
