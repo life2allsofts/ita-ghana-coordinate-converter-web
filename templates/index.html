@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghana Survey Coordinate Converter - Tetteh Apotey</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇬🇭 Ghana Survey Coordinate Converter</h1>
+            <p>Professional coordinate conversion tool for Ghana's land sector</p>
+        </div>
+        
+        <div class="converter-section">
+            <div class="conversion-type">
+                <button class="conversion-btn active" data-type="grid_to_geo">Grid → Geographic</button>
+                <button class="conversion-btn" data-type="geo_to_grid">Geographic → Grid</button>
+            </div>
+            
+            <!-- Grid to Geographic Input -->
+            <div id="grid-to-geo-input" class="input-section active">
+                <div class="input-group">
+                    <label for="easting">Easting (feet)</label>
+                    <input type="number" id="easting" step="0.01" placeholder="e.g., 1199601.82">
+                </div>
+                <div class="input-group">
+                    <label for="northing">Northing (feet)</label>
+                    <input type="number" id="northing" step="0.01" placeholder="e.g., 333506.23">
+                </div>
+            </div>
+            
+            <!-- Geographic to Grid Input -->
+            <div id="geo-to-grid-input" class="input-section">
+                <div class="format-toggle">
+                    <div class="format-option">
+                        <input type="radio" id="format-dd" name="format" value="dd" checked>
+                        <label for="format-dd">Decimal Degrees (DD)</label>
+                    </div>
+                    <div class="format-option">
+                        <input type="radio" id="format-dms" name="format" value="dms">
+                        <label for="format-dms">DMS (Degrees, Minutes, Seconds)</label>
+                    </div>
+                </div>
+                
+                <!-- Decimal Degrees Input -->
+                <div id="dd-input">
+                    <div class="input-group">
+                        <label for="latitude">Latitude (Decimal Degrees)</label>
+                        <input type="number" id="latitude" step="0.000001" placeholder="e.g., 5.588358">
+                        <small style="color: #666; font-size: 0.9em;">Enter latitude in decimal degrees format</small>
+                    </div>
+                    <div class="input-group">
+                        <label for="longitude">Longitude (Decimal Degrees)</label>
+                        <input type="number" id="longitude" step="0.000001" placeholder="e.g., -0.175317">
+                        <small style="color: #666; font-size: 0.9em;">Enter longitude in decimal degrees format</small>
+                    </div>
+                </div>
+                
+                <!-- DMS Input -->
+                <div id="dms-input" style="display: none;">
+                    <div class="input-group">
+                        <label>Latitude (DMS Format)</label>
+                        <div class="dms-inputs">
+                            <input type="number" id="lat-degrees" placeholder="Deg" min="0" max="90">
+                            <input type="number" id="lat-minutes" placeholder="Min" min="0" max="59">
+                            <input type="number" id="lat-seconds" placeholder="Sec" step="0.01" min="0" max="59.99">
+                            <select id="lat-hemisphere">
+                                <option value="N">N</option>
+                                <option value="S">S</option>
+                            </select>
+                        </div>
+                        <small style="color: #666; font-size: 0.9em;">Format: Degrees (0-90), Minutes (0-59), Seconds (0-59.99)</small>
+                    </div>
+                    <div class="input-group">
+                        <label>Longitude (DMS Format)</label>
+                        <div class="dms-inputs">
+                            <input type="number" id="lon-degrees" placeholder="Deg" min="0" max="180">
+                            <input type="number" id="lon-minutes" placeholder="Min" min="0" max="59">
+                            <input type="number" id="lon-seconds" placeholder="Sec" step="0.01" min="0" max="59.99">
+                            <select id="lon-hemisphere">
+                                <option value="E">E</option>
+                                <option value="W">W" selected>W</option>
+                            </select>
+                        </div>
+                        <small style="color: #666; font-size: 0.9em;">Format: Degrees (0-180), Minutes (0-59), Seconds (0-59.99)</small>
+                    </div>
+                    
+                    <!-- DMS Quick Input -->
+                    <div class="input-group">
+                        <label>Or Enter DMS as Text</label>
+                        <input type="text" id="dms-latitude" placeholder="e.g., 5° 35' 27.51&quot; N" style="margin-bottom: 5px;">
+                        <input type="text" id="dms-longitude" placeholder="e.g., 0° 10' 30.46&quot; W">
+                        <small style="color: #666; font-size: 0.9em;">Format: 5° 35' 27.51" N or 5 35 27.51 N</small>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="convert-btn" id="convert-btn">Convert Coordinates</button>
+            
+            <div class="loading" id="loading">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <div class="spinner"></div>
+                    Converting coordinates with survey-grade precision...
+                </div>
+            </div>
+            
+            <div class="error-message" id="error-message"></div>
+            
+            <div class="results-section" id="results-section">
+                <h3 style="margin-bottom: 20px; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
+                    📍 Conversion Results
+                </h3>
+                <div id="results-content"></div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Professional tool by <strong>Tetteh Apotey</strong> - Geomatics Engineer & Software Developer</p>
+            <p>Precision conversion meeting Ghana cadastral standards (±0.33ft accuracy)</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="{{ url_for('static', filename='js/converter.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ui.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

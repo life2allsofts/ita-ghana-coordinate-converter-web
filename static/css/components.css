@@ -1,0 +1,245 @@
+/* Component-specific styles */
+.conversion-type {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.conversion-btn {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.conversion-btn.active {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+/* FIX: Proper input section handling */
+.input-section {
+    display: none;
+}
+
+.input-section.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus, .input-group select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.dms-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.format-toggle {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.format-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.format-option:hover {
+    background: #e9ecef;
+}
+
+.format-option input[type="radio"] {
+    margin: 0;
+}
+
+.convert-btn {
+    width: 100%;
+    padding: 15px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 20px;
+}
+
+.convert-btn:hover {
+    background: #219a52;
+}
+
+.convert-btn:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.results-section {
+    display: none;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin-top: 25px;
+    animation: fadeIn 0.3s ease;
+}
+
+.results-section.active {
+    display: block;
+}
+
+.result-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+}
+
+.result-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.result-value {
+    font-size: 1.1em;
+    color: #27ae60;
+    font-weight: 500;
+}
+
+.error-message {
+    background: #e74c3c;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: none;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    display: none;
+}
+
+/* Spinner for loading */
+.spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Enhanced DMS inputs */
+.dms-inputs input::placeholder {
+    font-size: 0.8em;
+    color: #999;
+}
+
+/* Better formatting for small text */
+.input-group small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+    font-size: 0.85em;
+}
+
+/* Enhanced results styling */
+.results-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+/* Back button styling */
+.back-btn-container {
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+}
+
+.back-btn {
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #7f8c8d;
+}
+
+/* Input format sections */
+.format-section {
+    display: none;
+}
+
+.format-section.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
