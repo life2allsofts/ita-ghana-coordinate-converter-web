@@ -1,5 +1,4 @@
-# 🇬🇭 Ghana Survey Coordinate Converter - Web Version
-
+# ITA Ghana Coordinate Converter - Web Version
 A professional web application for converting between Ghana Grid coordinates and Geographic coordinates (WGS84).
 
 ## 🎯 Features
