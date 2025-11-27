@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ghana Survey Coordinate Converter - Tetteh Apotey</title>
     
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <!-- CSS Files with cache busting -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?v=2024">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}?v=2024">
 </head>
 <body>
     <div class="container">
@@ -125,9 +125,93 @@
         </div>
     </div>
 
-    <!-- JavaScript Files -->
-    <script src="{{ url_for('static', filename='js/converter.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/ui.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <!-- JavaScript Files with cache busting -->
+    <script src="{{ url_for('static', filename='js/converter.js') }}?v=2024"></script>
+    <script src="{{ url_for('static', filename='js/ui.js') }}?v=2024"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}?v=2024"></script>
+    
+    <!-- Enhanced initialization with debugging -->
+    <script>
+        console.log('🚀 Ghana Coordinate Converter - Initializing...');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ DOM fully loaded');
+            
+            // Check if required elements are present
+            const requiredElements = [
+                'convert-btn', 'grid-to-geo-input', 'geo-to-grid-input',
+                'easting', 'northing', 'latitude', 'longitude'
+            ];
+            
+            requiredElements.forEach(id => {
+                const element = document.getElementById(id);
+                console.log(`🔍 ${id}:`, element ? '✅ Found' : '❌ Missing');
+            });
+            
+            // Check if JavaScript classes are loaded
+            console.log('📜 UIHandler available:', typeof UIHandler !== 'undefined');
+            
+            // Initialize the application
+            if (typeof UIHandler !== 'undefined') {
+                try {
+                    window.uiHandler = new UIHandler();
+                    console.log('✅ UI Handler initialized successfully');
+                    
+                    // Test button functionality
+                    const buttons = document.querySelectorAll('.conversion-btn, .convert-btn');
+                    console.log('🔄 Found interactive buttons:', buttons.length);
+                    
+                } catch (error) {
+                    console.error('❌ Error initializing UI Handler:', error);
+                    showErrorToUser('Application failed to initialize. Please refresh the page.');
+                }
+            } else {
+                console.error('❌ UIHandler class not found - check JavaScript loading');
+                showErrorToUser('Application resources failed to load. Please refresh the page.');
+            }
+        });
+        
+        function showErrorToUser(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.style.cssText = `
+                background: #e74c3c; 
+                color: white; 
+                padding: 15px; 
+                margin: 10px; 
+                border-radius: 5px;
+                text-align: center;
+                font-weight: bold;
+                position: fixed;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10000;
+                max-width: 90%;
+            `;
+            errorDiv.innerHTML = `⚠️ ${message}`;
+            document.body.prepend(errorDiv);
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => {
+                if (errorDiv.parentNode) {
+                    errorDiv.parentNode.removeChild(errorDiv);
+                }
+            }, 10000);
+        }
+        
+        // Fallback initialization if DOMContentLoaded doesn't fire
+        window.addEventListener('load', function() {
+            console.log('🔄 Window load event fired');
+            if (!window.uiHandler && typeof UIHandler !== 'undefined') {
+                console.log('🔄 Initializing UI Handler on window load');
+                window.uiHandler = new UIHandler();
+            }
+        });
+        
+        // Global error handler
+        window.addEventListener('error', function(event) {
+            console.error('🚨 Global error caught:', event.error);
+        });
+    </script>
 </body>
 </html>
