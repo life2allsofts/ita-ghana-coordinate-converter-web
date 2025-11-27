@@ -1,10 +1,4 @@
-# Choose converter based on environment
-import os
+from .ghana_converter import GhanaWebConverter
+from .coordinate_utils import dms_to_decimal, decimal_to_dms
 
-if os.environ.get('VERCEL'):
-    from .pure_python_converter import GhanaPurePythonConverter as GhanaWebConverter
-else:
-    try:
-        from .ghana_converter import GhanaWebConverter
-    except ImportError:
-        from .pure_python_converter import GhanaPurePythonConverter as GhanaWebConverter
+__all__ = ['GhanaWebConverter', 'dms_to_decimal', 'decimal_to_dms']
