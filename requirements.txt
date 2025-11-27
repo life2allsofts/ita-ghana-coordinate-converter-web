@@ -1,2 +1,5 @@
+# requirements.txt 
 Flask==2.3.3
 python-dotenv==1.0.0
+pyproj==3.6.1
+gunicorn==21.2.0
