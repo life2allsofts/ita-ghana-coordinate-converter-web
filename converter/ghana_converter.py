@@ -1,5 +1,4 @@
 import math
-
 class GhanaPurePythonConverter:
     """
     ACCURATE Pure Python implementation for Vercel deployment
@@ -16,6 +15,14 @@ class GhanaPurePythonConverter:
         self.a = 6378249.145
         self.b = 6356514.966
         self.e2 = (self.a**2 - self.b**2) / self.a**2
+        
+        # ADD THESE LINES to make the classes type-compatible
+        self.ghana_proj_string = (
+            '+proj=tmerc +lat_0=4.669382 +lon_0=-1 +k=0.99975 '
+            '+x_0=274286.8 +y_0=0 +ellps=clrk80 +units=m +no_defs'
+        )
+        self.transformer_grid_to_geo = None
+        self.transformer_geo_to_grid = None
     
     def feet_to_meters(self, feet):
         return feet * 0.3048
@@ -134,4 +141,4 @@ try:
 except ImportError:
     # pyproj not available (on Vercel) - use the accurate pure Python version
     print("🔧 pyproj not available - using accurate pure Python GhanaWebConverter")
-    GhanaWebConverter = GhanaPurePythonConverter
+    GhanaWebConverter = GhanaPurePythonConverter  # type: ignore
